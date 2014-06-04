@@ -3,12 +3,6 @@
 <%= form_for [current_user, @post] do |f| %>
   <% if @post.errors.any? %>
     <div class="error_messages">
-      <h2><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved:</h2>
-      <ul>
-      <% @post.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
     </div>
   <% end %>
   <div class='field'>
