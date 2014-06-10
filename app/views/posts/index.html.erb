@@ -1,17 +1,25 @@
-<h1>Posts</h1>
+<div>
+  <h1>Posts</h1>
 
-<div id="posts">
-<% @posts.each do |post| %>
-  <h2>
-    <%= link_to post.title, [current_user, post] %>
-  </h2>
-  <div class="info">
-    by <%= post.user.email %>
-    on <%= post.created_at.strftime('%b %d, %Y') %>
+  <div id="posts">
+    <% @posts.each do |post| %>
+      <h2>
+        <%= link_to post.title, [current_user, post] %>
+      </h2>
+      <div class="info">
+        by <%= post.user.email %> on <%= post.created_at.strftime('%b %d, %Y') %>
+      </div>
+      <div class="content"><%= post.body %></div>
+      <% if current_user_authorized? %>
+        <div class="actions">
+          <%= link_to "delete", [current_user, post], method: :delete %>
+        </div>
+      <% end %>
+    <% end %>
   </div>
-  <div class="content"><%= post.body %></div>
-  <div class="actions">
-    <%= link_to "delete", [current_user, post], method: :delete %>
-  </div>
-<% end %>
+  <% if current_user_authorized? %>
+    <h2>
+      <%= link_to 'New post', new_user_post_path %>
+    </h2>
+  <% end %>
 </div>

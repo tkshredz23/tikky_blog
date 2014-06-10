@@ -1,12 +1,21 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!
+  before_action :authorize_user, only: [:new, :create, :destroy]
 
   def index
-    @posts = Post.all
+    user = User.find(params[:user_id])
+    if user
+      @posts = user.posts
+    else
+      render_404
+    end
   end
 
   def show
     @post = Post.find(params[:id])
+    unless @post
+      render_404
+    end
   end
 
   def new
@@ -16,7 +25,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     if @post.save!
-      redirect_to user_post_path(current_user, @post)
+      redirect_to user_posts_path(current_user)
     else
       render :new
     end
