@@ -13,9 +13,7 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
-    unless @post
-      render_404
-    end
+    render_404 unless @post
   end
 
   def new

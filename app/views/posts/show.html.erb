@@ -2,5 +2,20 @@
   <h1><%= @post.title %></h1>
   <p><%= @post.body %> </p>
 
+  <% @post.comments.each do |c| %>
+    <p><%= c.content %></p>
+  <% end %>
+  <!-- new comment form -->
+  <%= form_for [current_user, @post, Comment.new] do |f| %>
+      <div class='field'>
+        <%= f.label :Comment %><br/>
+        <%= f.text_field :content %>
+      </div>
+      <div class='actions'>
+        <%= f.submit %>
+      </div>
+  <% end %>
+  <!-- end comment form -->
+
   <%= link_to 'Back to all posts', user_posts_path %>
 </div>
