@@ -4,7 +4,7 @@
   <div id="posts">
     <% @posts.each do |post| %>
       <h2>
-        <%= link_to post.title, [current_user, post] %>
+        <%= link_to post.title, user_post_path(params[:user_id], post) %>
       </h2>
       <div class="info">
         by <%= post.user.email %> on <%= post.created_at.strftime('%b %d, %Y') %>

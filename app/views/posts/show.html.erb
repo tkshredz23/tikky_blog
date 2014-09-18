@@ -1,6 +1,13 @@
-<div class="post">
-  <h1><%= @post.title %></h1>
-  <p><%= @post.body %> </p>
-
+<div id="posts">
+  <h2><%= @post.title %></h2>
+  <div class="info">
+    by <%= @post.user.email %> on <%= @post.created_at.strftime('%b %d, %Y') %>
+  </div>
+  <div class='content'>
+    <%= @post.body %>
+  </div>
+</div>
+<div>
+  <br />
   <%= link_to 'Back to all posts', user_posts_path %>
 </div>
